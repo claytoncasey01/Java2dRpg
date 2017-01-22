@@ -1,14 +1,23 @@
 package com.bearcavestudios.tilerpg;
 
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+
 import com.bearcavestudios.tilerpg.Display.Display;
 
 public class Game implements Runnable {
 	
+	public String title;
+	public int width, height;
+	
 	private Display display;
 	private Thread thread;
 	private boolean running = false;
-	public String title;
-	public int width, height;
+	
+	private BufferStrategy bs;
+	private Graphics g;
+	
+	
 	
 	
 	public Game(String title, int width, int height) {
@@ -26,7 +35,22 @@ public class Game implements Runnable {
 	}
 	
 	private void render() {
+		bs = display.getCanvas().getBufferStrategy();
 		
+		// If this is the first run, the canvas
+		// will not have a buffer strategy, so create one.
+		if(bs == null) {
+			display.getCanvas().createBufferStrategy(3);
+			return;
+		}
+		
+		g = bs.getDrawGraphics();
+		// Draw Here!
+		g.fillRect(0, 0, width, height);
+		
+		// End Draw!
+		bs.show();
+		g.dispose();
 	}
 
 	@Override
