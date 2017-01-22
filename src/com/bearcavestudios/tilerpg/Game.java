@@ -30,7 +30,7 @@ public class Game implements Runnable {
 		display = new Display(title, width, height);
 	}
 	
-	private void tick() {
+	private void update() {
 		
 	}
 	
@@ -58,7 +58,7 @@ public class Game implements Runnable {
 		init();
 		
 		while(running) {
-			tick();
+			update();
 			render();
 		}
 		
