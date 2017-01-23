@@ -2,8 +2,10 @@ package com.bearcavestudios.tilerpg;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import com.bearcavestudios.tilerpg.Display.Display;
+import com.bearcavestudios.tilerpg.gfx.ImageLoader;
 
 public class Game implements Runnable {
 	
@@ -15,10 +17,7 @@ public class Game implements Runnable {
 	private boolean running = false;
 	
 	private BufferStrategy bs;
-	private Graphics g;
-	
-	
-	
+	private Graphics g;	
 	
 	public Game(String title, int width, int height) {
 		this.title = title;
@@ -45,10 +44,10 @@ public class Game implements Runnable {
 		}
 		
 		g = bs.getDrawGraphics();
-		// Draw Here!
-		g.fillRect(0, 0, width, height);
+		// Clear Screen
+		g.clearRect(0, 0, width, height);
 		
-		// End Draw!
+		
 		bs.show();
 		g.dispose();
 	}
