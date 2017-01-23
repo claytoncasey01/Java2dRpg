@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import com.bearcavestudios.tilerpg.Display.Display;
+import com.bearcavestudios.tilerpg.gfx.Assets;
 import com.bearcavestudios.tilerpg.gfx.ImageLoader;
 import com.bearcavestudios.tilerpg.gfx.SpriteSheet;
 
@@ -20,8 +21,6 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;	
 	
-	private BufferedImage test;
-	private SpriteSheet sheet;
 	
 	public Game(String title, int width, int height) {
 		this.title = title;
@@ -31,8 +30,7 @@ public class Game implements Runnable {
 	
 	private void init() {
 		display = new Display(title, width, height);
-		test = ImageLoader.loadImage("/textures/forest.png");
-		sheet = new SpriteSheet(test);
+		Assets.init();
 	}
 	
 	private void update() {
@@ -53,7 +51,14 @@ public class Game implements Runnable {
 		// Clear Screen
 		g.clearRect(0, 0, width, height);
 		
-		g.drawImage(sheet.crop(0, 0, 32, 32), 5, 5, null);
+		// Test code to fill screen with grass tiles
+		for(int i = 0; i < 20; i++) {
+			for(int j = 0; j < 20; j++) {
+				g.drawImage(Assets.grass, i * 32, j * 32, null);
+			}
+		}
+		g.drawImage(Assets.stump, 16, 34, null);
+		
 		bs.show();
 		g.dispose();
 	}
