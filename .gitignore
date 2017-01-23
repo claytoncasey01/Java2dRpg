@@ -1,1 +1,4 @@
 bin/*
+bin/com/bearcavestudios/tilerpg/Launcher.class
+bin/com/bearcavestudios/tilerpg/Display/Display.class
+*.class
