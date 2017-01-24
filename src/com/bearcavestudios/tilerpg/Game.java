@@ -33,8 +33,10 @@ public class Game implements Runnable {
 		Assets.init();
 	}
 	
-	private void update() {
-		
+	int x = 0;
+	
+	private void tick() {
+		x += 1;
 	}
 	
 	private void render() {
@@ -51,13 +53,7 @@ public class Game implements Runnable {
 		// Clear Screen
 		g.clearRect(0, 0, width, height);
 		
-		// Test code to fill screen with grass tiles
-		for(int i = 0; i < 20; i++) {
-			for(int j = 0; j < 20; j++) {
-				g.drawImage(Assets.grass, i * 32, j * 32, null);
-			}
-		}
-		g.drawImage(Assets.stump, 16, 34, null);
+		g.drawImage(Assets.grass, x, 10, null);
 		
 		bs.show();
 		g.dispose();
@@ -67,9 +63,32 @@ public class Game implements Runnable {
 	public void run() {
 		init();
 		
+		int fps = 60;
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+		
 		while(running) {
-			update();
-			render();
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += (now - lastTime);
+			lastTime = now;
+			
+			if(delta >= 1) {
+				tick();
+				render();
+				ticks++;
+				delta--;
+			}
+			
+			if(timer >= 1000000000) {
+				System.out.println("Ticks and Frames: " + ticks);
+				ticks = 0;
+				timer = 0;
+			}
 		}
 		
 		stop();
