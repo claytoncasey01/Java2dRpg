@@ -2,12 +2,11 @@ package com.bearcavestudios.tilerpg;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 import com.bearcavestudios.tilerpg.Display.Display;
 import com.bearcavestudios.tilerpg.gfx.Assets;
-import com.bearcavestudios.tilerpg.gfx.ImageLoader;
-import com.bearcavestudios.tilerpg.gfx.SpriteSheet;
+import com.bearcavestudios.tilerpg.states.GameState;
+import com.bearcavestudios.tilerpg.states.State;
 
 public class Game implements Runnable {
 	
@@ -21,6 +20,8 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;	
 	
+	// States
+	private State gameState;
 	
 	public Game(String title, int width, int height) {
 		this.title = title;
@@ -31,12 +32,15 @@ public class Game implements Runnable {
 	private void init() {
 		display = new Display(title, width, height);
 		Assets.init();
+		
+		gameState = new GameState();
+		State.setState(gameState);
 	}
 	
-	int x = 0;
-	
 	private void tick() {
-		x += 1;
+		if(State.getState() != null) {
+			State.getState().tick();
+		}
 	}
 	
 	private void render() {
@@ -53,7 +57,9 @@ public class Game implements Runnable {
 		// Clear Screen
 		g.clearRect(0, 0, width, height);
 		
-		g.drawImage(Assets.grass, x, 10, null);
+		if(State.getState() != null) {
+			State.getState().render(g);
+		}
 		
 		bs.show();
 		g.dispose();
