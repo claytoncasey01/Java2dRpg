@@ -1,4 +1,4 @@
-package com.bearcavestudios.tilerpg.Display;
+package com.bearcavestudios.tilerpg.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;

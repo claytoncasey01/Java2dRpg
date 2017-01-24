@@ -3,9 +3,10 @@ package com.bearcavestudios.tilerpg;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import com.bearcavestudios.tilerpg.Display.Display;
+import com.bearcavestudios.tilerpg.display.Display;
 import com.bearcavestudios.tilerpg.gfx.Assets;
 import com.bearcavestudios.tilerpg.states.GameState;
+import com.bearcavestudios.tilerpg.states.MenuState;
 import com.bearcavestudios.tilerpg.states.State;
 
 public class Game implements Runnable {
@@ -22,6 +23,7 @@ public class Game implements Runnable {
 	
 	// States
 	private State gameState;
+	private State menuState;
 	
 	public Game(String title, int width, int height) {
 		this.title = title;
@@ -34,6 +36,7 @@ public class Game implements Runnable {
 		Assets.init();
 		
 		gameState = new GameState();
+		menuState = new MenuState();
 		State.setState(gameState);
 	}
 	
