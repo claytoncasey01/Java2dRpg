@@ -2,10 +2,12 @@ package com.bearcavestudios.tilerpg.states;
 
 import java.awt.Graphics;
 
+import com.bearcavestudios.tilerpg.Game;
+
 public class MenuState extends State {
 	
-	public MenuState() {
-		
+	public MenuState(Game game) {
+		super(game);
 	}
 
 	@Override

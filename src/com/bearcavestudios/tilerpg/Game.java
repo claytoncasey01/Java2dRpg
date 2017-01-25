@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 import com.bearcavestudios.tilerpg.display.Display;
 import com.bearcavestudios.tilerpg.gfx.Assets;
+import com.bearcavestudios.tilerpg.input.KeyManager;
 import com.bearcavestudios.tilerpg.states.GameState;
 import com.bearcavestudios.tilerpg.states.MenuState;
 import com.bearcavestudios.tilerpg.states.State;
@@ -25,22 +26,29 @@ public class Game implements Runnable {
 	private State gameState;
 	private State menuState;
 	
+	// Input
+	private KeyManager keyManager;
+	
 	public Game(String title, int width, int height) {
 		this.title = title;
 		this.width = width;
 		this.height = height;
+		keyManager = new KeyManager();
 	}
 	
 	private void init() {
 		display = new Display(title, width, height);
+		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
-		gameState = new GameState();
-		menuState = new MenuState();
+		gameState = new GameState(this);
+		menuState = new MenuState(this);
 		State.setState(gameState);
 	}
 	
 	private void tick() {
+		keyManager.tick();
+		
 		if(State.getState() != null) {
 			State.getState().tick();
 		}
@@ -102,6 +110,10 @@ public class Game implements Runnable {
 		
 		stop();
 		
+	}
+	
+	public KeyManager getKeyManager() {
+		return keyManager;
 	}
 	
 	public synchronized void start() {
