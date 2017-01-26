@@ -24,6 +24,8 @@ public class GameState extends State {
 	public void render(Graphics g) {
 		player.render(g);
 		Tile.tiles[0].render(g, 0, 0);
+		Tile.tiles[1].render(g, 32, 0);
+		Tile.tiles[2].render(g, 64, 0);
 		
 	}
 

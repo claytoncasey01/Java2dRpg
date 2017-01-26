@@ -5,7 +5,7 @@ import com.bearcavestudios.tilerpg.gfx.Assets;
 public class RockTile extends Tile {
 	
 	public RockTile(int id) {
-		super(Assets.stone, id);
+		super(Assets.rock, id);
 	}
 	
 	@Override
