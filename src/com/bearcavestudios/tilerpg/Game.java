@@ -68,13 +68,8 @@ public class Game implements Runnable {
 		// Clear Screen
 		g.clearRect(0, 0, width, height);
 		
-		// Test code to render grass
-		for(int x = 0; x <= width; x++) {
-			for(int y = 0; y < height; y++) {
-				g.drawImage(Assets.grass, x * 32, y * 32, null);
-			}
-		}
-		
+		// Get the state of the game 
+		// and run its render method
 		if(State.getState() != null) {
 			State.getState().render(g);
 		}

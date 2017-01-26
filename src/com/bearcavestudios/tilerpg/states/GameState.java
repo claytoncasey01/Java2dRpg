@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import com.bearcavestudios.tilerpg.Game;
 import com.bearcavestudios.tilerpg.entities.creatures.Player;
+import com.bearcavestudios.tilerpg.tiles.Tile;
 
 public class GameState extends State {
 	
@@ -22,6 +23,7 @@ public class GameState extends State {
 	@Override
 	public void render(Graphics g) {
 		player.render(g);
+		Tile.tiles[0].render(g, 0, 0);
 		
 	}
 
