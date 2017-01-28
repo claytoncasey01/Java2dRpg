@@ -25,8 +25,13 @@ public class World {
 	}
 	
 	public void render(Graphics g) {
-		for(int y = 0; y < height; y++) {
-			for(int x = 0; x < width; x++) {
+		int xStart = (int)Math.max(0, game.getCamera().getxOffset() / Tile.TILE_WIDTH);
+		int xEnd = (int)Math.min(width, (game.getCamera().getxOffset() + game.getWidth()) / Tile.TILE_WIDTH + 1);
+		int yStart = (int)Math.max(0, game.getCamera().getyOffset() / Tile.TILE_HEIGHT);
+		int yEnd = (int)Math.min(height, (game.getCamera().getyOffset() + game.getHeight()) / Tile.TILE_HEIGHT + 1) ;
+		
+		for(int y = yStart; y < yEnd; y++) {
+			for(int x = xStart; x < xEnd; x++) {
 				getTile(x, y).render(g, (int) (x * Tile.TILE_WIDTH - game.getCamera().getxOffset()), 
 						(int) (y * Tile.TILE_HEIGHT - game.getCamera().getyOffset()));
 			}
@@ -64,8 +69,8 @@ public class World {
 	// this is just temporary
 	private void generateWorld() {
 		Random rand = new Random();
-		width = 50;
-		height = 50;
+		width = 100;
+		height = 100;
 		tiles = new int[width][height];
 		
 		for(int y = 0; y < height; y++) {
