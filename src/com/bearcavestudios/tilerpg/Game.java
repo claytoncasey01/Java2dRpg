@@ -84,6 +84,7 @@ public class Game implements Runnable {
 			State.getState().render(g);
 		}
 		
+		
 		bs.show();
 		g.dispose();
 	}

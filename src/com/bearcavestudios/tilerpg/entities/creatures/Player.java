@@ -1,6 +1,5 @@
 package com.bearcavestudios.tilerpg.entities.creatures;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import com.bearcavestudios.tilerpg.Handler;
