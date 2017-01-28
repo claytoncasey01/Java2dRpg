@@ -2,6 +2,7 @@ package com.bearcavestudios.tilerpg.worlds;
 
 import java.awt.Graphics;
 
+import com.bearcavestudios.tilerpg.Game;
 import com.bearcavestudios.tilerpg.tiles.Tile;
 import com.bearcavestudios.tilerpg.utils.Utils;
 
@@ -10,8 +11,10 @@ public class World {
 	private int width, height;
 	private int spawnX, spawnY;
 	private int[][] tiles;
+	private Game game;
 	
-	public World(String path) {
+	public World(Game game, String path) {
+		this.game = game;
 		loadWorld(path);
 	}
 	
