@@ -15,8 +15,8 @@ public class World {
 	private int[][] tiles;
 	
 	
-	public World(Handler game, String path) {
-		this.handler = game;
+	public World(Handler handler, String path) {
+		this.handler = handler;
 		//loadWorld(path);
 		generateWorld();
 	}

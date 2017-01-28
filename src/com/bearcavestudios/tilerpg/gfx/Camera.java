@@ -1,6 +1,7 @@
 package com.bearcavestudios.tilerpg.gfx;
 
 import com.bearcavestudios.tilerpg.Game;
+import com.bearcavestudios.tilerpg.Handler;
 import com.bearcavestudios.tilerpg.entities.Entity;
 
 public class Camera {
