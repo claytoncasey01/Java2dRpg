@@ -2,30 +2,72 @@ package com.bearcavestudios.tilerpg.entities.creatures;
 
 import com.bearcavestudios.tilerpg.Handler;
 import com.bearcavestudios.tilerpg.entities.Entity;
+import com.bearcavestudios.tilerpg.tiles.Tile;
 
 public abstract class Creature extends Entity {
-	
+
 	public static final int DEFAULT_HEALTH = 10;
 	public static final float DEFAULT_SPEED = 3.0f;
-	public static final int DEFAULT_CREATURE_WIDTH = 32,
-							DEFAULT_CREATURE_HEIGHT = 32;
-	
+	public static final int DEFAULT_CREATURE_WIDTH = 32, DEFAULT_CREATURE_HEIGHT = 32;
+
 	protected int health;
 	protected float speed;
 	protected float xMove, yMove;
 
 	public Creature(Handler handler, float x, float y, int width, int height) {
-		super(handler,x, y, width, height);
+		super(handler, x, y, width, height);
 		health = DEFAULT_HEALTH;
 		speed = DEFAULT_SPEED;
 		xMove = 0;
 		yMove = 0;
 	}
-	
+
 	// Handle creature movement
 	public void move() {
-		x += xMove;
-		y += yMove;
+		moveX();
+		moveY();
+	}
+
+	public void moveX() {
+		if (xMove > 0) { // Moving right
+			int tx = (int) ((x + xMove + bounds.x + bounds.width) / Tile.TILE_WIDTH);
+
+			if (!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT)
+					&& !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)) {
+				x += xMove;
+			}
+
+		} else if (xMove < 0) { // Moving left
+			int tx = (int) ((x + xMove + bounds.x) / Tile.TILE_WIDTH);
+
+			if (!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT)
+					&& !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)) {
+				x += xMove;
+			}
+		}
+	}
+
+	public void moveY() {
+		if (yMove < 0) { // Moving up
+			int ty = (int) (y + bounds.y) / Tile.TILE_HEIGHT;
+
+			if (!collisionWithTile((int) (x + bounds.x) / Tile.TILE_WIDTH, ty)
+					&& !collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty)) {
+				y += yMove;
+			}
+
+		} else if (yMove > 0) { // Moving down
+			int ty = (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT;
+
+			if (!collisionWithTile((int) (x + bounds.x) / Tile.TILE_WIDTH, ty)
+					&& !collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty)) {
+				y += yMove;
+			}
+		}
+	}
+
+	protected boolean collisionWithTile(int x, int y) {
+		return handler.getWorld().getTile(x, y).isSolid();
 	}
 
 	// Getters and Setters
@@ -44,7 +86,7 @@ public abstract class Creature extends Entity {
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
-	
+
 	public float getxMove() {
 		return xMove;
 	}
@@ -60,5 +102,5 @@ public abstract class Creature extends Entity {
 	public void setyMove(float yMove) {
 		this.yMove = yMove;
 	}
-	
+
 }

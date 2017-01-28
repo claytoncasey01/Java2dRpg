@@ -1,6 +1,7 @@
 package com.bearcavestudios.tilerpg.entities;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import com.bearcavestudios.tilerpg.Handler;
 
@@ -9,6 +10,7 @@ public abstract class Entity {
 	protected Handler handler;
 	protected float x, y;
 	protected int width, height;
+	protected Rectangle bounds;
 	
 	
 	public Entity(Handler handler, float x, float y, int width, int height) {
@@ -17,6 +19,8 @@ public abstract class Entity {
 		this.width = width;
 		this.height = height;
 		this.handler = handler;
+		
+		bounds = new Rectangle(0, 0, width, height);
 	}
 	
 	public abstract void tick();

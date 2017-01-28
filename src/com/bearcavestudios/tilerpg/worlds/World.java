@@ -40,6 +40,12 @@ public class World {
 	}
 	
 	public Tile getTile(int x, int y) {
+		// Make sure x and y are inside of the map
+		// if not just use grass tile so we don't crash.
+		if(x < 0 || y < 0 || x >= width || y >= height) {
+			return Tile.grassTile;
+		}
+		
 		Tile t = Tile.tiles[tiles[x][y]];
 		if(t == null) {
 			return Tile.dirtTile;
@@ -77,13 +83,15 @@ public class World {
 		for(int y = 0; y < height; y++) {
 			for(int x = 0; x < width; x++) {
 				int num = rand.nextInt(100) + 1;
-				if( num > 0 && num <= 90) {
+				if(x == width - 1 || y == height - 1 || x == 0 || y == 0) { // Generate walls around map
+					tiles[x][y] = 1;
+				} else if(num > 0 && num <= 95) {
 					tiles[x][y] = 0;
-				} else if(num > 90 && num <= 98) {
+				} else if(num > 95 && num <= 98){
 					tiles[x][y] = 2;
 				} else {
 					tiles[x][y] = 1;
-				}
+ 				}
 			}
 		}
 	}
