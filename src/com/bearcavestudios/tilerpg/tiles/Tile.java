@@ -7,7 +7,7 @@ public class Tile {
 	
 	public static Tile[] tiles =  new Tile[256];
 	public static Tile grassTile = new GrassTile(0);
-	public static Tile rockTile = new RockTile(1);
+	public static Tile stoneTile = new StoneTile(1);
 	public static Tile dirtTile = new DirtTile(2);
 	
 	public static final int TILE_WIDTH = 32,

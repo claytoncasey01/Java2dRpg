@@ -1,6 +1,7 @@
 package com.bearcavestudios.tilerpg.worlds;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 import com.bearcavestudios.tilerpg.Game;
 import com.bearcavestudios.tilerpg.tiles.Tile;
@@ -15,7 +16,8 @@ public class World {
 	
 	public World(Game game, String path) {
 		this.game = game;
-		loadWorld(path);
+		//loadWorld(path);
+		generateWorld();
 	}
 	
 	public void tick() {
@@ -56,8 +58,28 @@ public class World {
 				tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
 			}
 		}
+	}
+	
+	// Generates a randomized world
+	// this is just temporary
+	private void generateWorld() {
+		Random rand = new Random();
+		width = 50;
+		height = 50;
+		tiles = new int[width][height];
 		
-		
+		for(int y = 0; y < height; y++) {
+			for(int x = 0; x < width; x++) {
+				int num = rand.nextInt(100) + 1;
+				if( num > 0 && num <= 90) {
+					tiles[x][y] = 0;
+				} else if(num > 90 && num <= 98) {
+					tiles[x][y] = 2;
+				} else {
+					tiles[x][y] = 1;
+				}
+			}
+		}
 	}
 
 
