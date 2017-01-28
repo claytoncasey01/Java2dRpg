@@ -3,19 +3,20 @@ package com.bearcavestudios.tilerpg.worlds;
 import java.awt.Graphics;
 import java.util.Random;
 
-import com.bearcavestudios.tilerpg.Game;
+import com.bearcavestudios.tilerpg.Handler;
 import com.bearcavestudios.tilerpg.tiles.Tile;
 import com.bearcavestudios.tilerpg.utils.Utils;
 
 public class World {
 	
+	private Handler handler;
 	private int width, height;
 	private int spawnX, spawnY;
 	private int[][] tiles;
-	private Game game;
 	
-	public World(Game game, String path) {
-		this.game = game;
+	
+	public World(Handler game, String path) {
+		this.handler = game;
 		//loadWorld(path);
 		generateWorld();
 	}
@@ -25,15 +26,15 @@ public class World {
 	}
 	
 	public void render(Graphics g) {
-		int xStart = (int)Math.max(0, game.getCamera().getxOffset() / Tile.TILE_WIDTH);
-		int xEnd = (int)Math.min(width, (game.getCamera().getxOffset() + game.getWidth()) / Tile.TILE_WIDTH + 1);
-		int yStart = (int)Math.max(0, game.getCamera().getyOffset() / Tile.TILE_HEIGHT);
-		int yEnd = (int)Math.min(height, (game.getCamera().getyOffset() + game.getHeight()) / Tile.TILE_HEIGHT + 1) ;
+		int xStart = (int)Math.max(0, handler.getCamera().getxOffset() / Tile.TILE_WIDTH);
+		int xEnd = (int)Math.min(width, (handler.getCamera().getxOffset() + handler.getWidth()) / Tile.TILE_WIDTH + 1);
+		int yStart = (int)Math.max(0, handler.getCamera().getyOffset() / Tile.TILE_HEIGHT);
+		int yEnd = (int)Math.min(height, (handler.getCamera().getyOffset() + handler.getHeight()) / Tile.TILE_HEIGHT + 1) ;
 		
 		for(int y = yStart; y < yEnd; y++) {
 			for(int x = xStart; x < xEnd; x++) {
-				getTile(x, y).render(g, (int) (x * Tile.TILE_WIDTH - game.getCamera().getxOffset()), 
-						(int) (y * Tile.TILE_HEIGHT - game.getCamera().getyOffset()));
+				getTile(x, y).render(g, (int) (x * Tile.TILE_WIDTH - handler.getCamera().getxOffset()), 
+						(int) (y * Tile.TILE_HEIGHT - handler.getCamera().getyOffset()));
 			}
 		}
 	}

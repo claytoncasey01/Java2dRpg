@@ -2,20 +2,21 @@ package com.bearcavestudios.tilerpg.entities;
 
 import java.awt.Graphics;
 
-import com.bearcavestudios.tilerpg.Game;
+import com.bearcavestudios.tilerpg.Handler;
 
 public abstract class Entity {
-
+	
+	protected Handler handler;
 	protected float x, y;
 	protected int width, height;
-	protected Game game;
 	
-	public Entity(Game game, float x, float y, int width, int height) {
+	
+	public Entity(Handler handler, float x, float y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.game = game;
+		this.handler = handler;
 	}
 	
 	public abstract void tick();
