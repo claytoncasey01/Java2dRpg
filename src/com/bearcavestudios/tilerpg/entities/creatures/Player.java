@@ -16,11 +16,15 @@ public class Player extends Creature {
 	public void tick() {
 		getInput();
 		move();
+		
+		// Center game camera on player
+		game.getCamera().centerOnEntity(this);
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.player, (int)x, (int)y, width, height, null);
+		g.drawImage(Assets.player, (int)(x - game.getCamera().getxOffset()), 
+				(int)(y - game.getCamera().getyOffset()), width, height, null);
 		
 	}
 	

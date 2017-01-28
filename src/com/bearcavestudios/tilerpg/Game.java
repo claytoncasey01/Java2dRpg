@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 import com.bearcavestudios.tilerpg.display.Display;
 import com.bearcavestudios.tilerpg.gfx.Assets;
+import com.bearcavestudios.tilerpg.gfx.Camera;
 import com.bearcavestudios.tilerpg.input.KeyManager;
 import com.bearcavestudios.tilerpg.states.GameState;
 import com.bearcavestudios.tilerpg.states.MenuState;
@@ -13,7 +14,7 @@ import com.bearcavestudios.tilerpg.states.State;
 public class Game implements Runnable {
 	
 	public String title;
-	public int width, height;
+	private int width, height;
 	
 	private Display display;
 	private Thread thread;
@@ -29,6 +30,9 @@ public class Game implements Runnable {
 	// Input
 	private KeyManager keyManager;
 	
+	// Camera
+	private Camera camera;
+	
 	public Game(String title, int width, int height) {
 		this.title = title;
 		this.width = width;
@@ -40,6 +44,8 @@ public class Game implements Runnable {
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
+		
+		camera = new Camera(this, 0, 0);
 		
 		gameState = new GameState(this);
 		menuState = new MenuState(this);
@@ -114,10 +120,6 @@ public class Game implements Runnable {
 		
 	}
 	
-	public KeyManager getKeyManager() {
-		return keyManager;
-	}
-	
 	public synchronized void start() {
 		if(running)
 			return;
@@ -136,6 +138,24 @@ public class Game implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// Getters and Setters
+	
+	public Camera getCamera() {
+		return camera;
+	}
+	
+	public KeyManager getKeyManager() {
+		return keyManager;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 
 }
