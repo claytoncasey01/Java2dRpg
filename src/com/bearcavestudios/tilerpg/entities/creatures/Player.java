@@ -21,7 +21,7 @@ public class Player extends Creature {
 		bounds.x = 18;
 		bounds.y = 28;
 		bounds.width = 28;
-		bounds.height = 34;
+		bounds.height = 32;
 		
 		// Animations
 		animIdle = new Animation(0, Assets.player_idle);
@@ -54,8 +54,8 @@ public class Player extends Creature {
 		g.drawImage(getCurrentAnimationFrame(), (int)(x - handler.getCamera().getxOffset()), 
 				(int)(y - handler.getCamera().getyOffset()), width, height, null);
 		
-		/*// Test code to show bounding box for collision detection
-		g.setColor(Color.red);
+		// Test code to show bounding box for collision detection
+		/*g.setColor(Color.red);
 		g.fillRect((int)(x + bounds.x - handler.getCamera().getxOffset()), 
 				(int)(y + bounds.y - handler.getCamera().getyOffset()), bounds.width, bounds.height);*/
 		
