@@ -15,13 +15,13 @@ public class Player extends Creature {
 	
 
 	public Player(Handler handler, float x, float y) {
-		super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+		super(handler, x, y, 64, 64);
 		
 		// Setup bounds for collision
-		bounds.x = 10;
-		bounds.y = 8;
-		bounds.width = 12;
-		bounds.height = 24;
+		bounds.x = 18;
+		bounds.y = 28;
+		bounds.width = 28;
+		bounds.height = 34;
 		
 		// Animations
 		animIdle = new Animation(0, Assets.player_idle);
@@ -54,8 +54,8 @@ public class Player extends Creature {
 		g.drawImage(getCurrentAnimationFrame(), (int)(x - handler.getCamera().getxOffset()), 
 				(int)(y - handler.getCamera().getyOffset()), width, height, null);
 		
-		// Test code to show bounding box for collision detection
-		/*g.setColor(Color.red);
+		/*// Test code to show bounding box for collision detection
+		g.setColor(Color.red);
 		g.fillRect((int)(x + bounds.x - handler.getCamera().getxOffset()), 
 				(int)(y + bounds.y - handler.getCamera().getyOffset()), bounds.width, bounds.height);*/
 		

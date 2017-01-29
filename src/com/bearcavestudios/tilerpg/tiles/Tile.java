@@ -15,6 +15,7 @@ public class Tile {
 	
 	protected BufferedImage texture;
 	protected final int id;
+	protected boolean solid = false;
 	
 	public Tile(BufferedImage texture, int id) {
 		this.texture = texture;
@@ -32,7 +33,11 @@ public class Tile {
 	}
 	
 	public boolean isSolid() {
-		return false;
+		return solid;
+	}
+	
+	public void setSolid(boolean sol) {
+		solid = sol;
 	}
 	
 	public int getId() {
