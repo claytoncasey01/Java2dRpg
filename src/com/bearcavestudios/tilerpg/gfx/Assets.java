@@ -6,7 +6,7 @@ public class Assets {
 	
 	private static final int WIDTH = 32, HEIGHT = 32;
 	private static final int PLAYER_WIDTH = 64, PLAYER_HEIGHT = 64;
-	public static BufferedImage grass, rock, dirt;
+	public static BufferedImage grass, rock, dirt, grassPatch, tree;
 	public static BufferedImage[] player_idle, player_up, player_down, player_left, player_right;
 	
 
@@ -16,6 +16,8 @@ public class Assets {
 		grass = sheet.crop(0, 0, WIDTH, HEIGHT);
 		rock = sheet.crop(32 * 1, 0, WIDTH, HEIGHT);
 		dirt = sheet.crop(32 * 2, 0, WIDTH, HEIGHT);
+		grassPatch = sheet.crop(32 * 3, 0, WIDTH, HEIGHT);
+		tree = sheet.crop(WIDTH, HEIGHT, WIDTH * 2, HEIGHT * 3);
 		
 		// Player down animations
 		player_idle = new BufferedImage[1];

@@ -4,6 +4,10 @@ import java.awt.Graphics;
 import java.util.Random;
 
 import com.bearcavestudios.tilerpg.Handler;
+import com.bearcavestudios.tilerpg.entities.EntityManager;
+import com.bearcavestudios.tilerpg.entities.creatures.Player;
+import com.bearcavestudios.tilerpg.entities.statics.Tree;
+import com.bearcavestudios.tilerpg.gfx.Assets;
 import com.bearcavestudios.tilerpg.tiles.Tile;
 import com.bearcavestudios.tilerpg.utils.Utils;
 
@@ -13,16 +17,22 @@ public class World {
 	private int width, height;
 	private int spawnX, spawnY;
 	private int[][] tiles;
+	// Entities
+	private EntityManager entityManager;
 	
 	
 	public World(Handler handler, String path) {
 		this.handler = handler;
-		//loadWorld(path);
-		generateWorld();
+		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+		loadWorld(path);
+		//generateWorld();
+		
+		entityManager.getPlayer().setX(spawnX);
+		entityManager.getPlayer().setY(spawnY);
 	}
 	
 	public void tick() {
-		
+		entityManager.tick();
 	}
 	
 	public void render(Graphics g) {
@@ -37,6 +47,9 @@ public class World {
 						(int) (y * Tile.TILE_HEIGHT - handler.getCamera().getyOffset()));
 			}
 		}
+		
+		// Entities
+		entityManager.render(g);
 	}
 	
 	public Tile getTile(int x, int y) {
