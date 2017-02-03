@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.bearcavestudios.tilerpg.Handler;
 import com.bearcavestudios.tilerpg.entities.creatures.Player;
+import com.bearcavestudios.tilerpg.entities.statics.Tree;
 
 public class EntityManager {
 	
@@ -17,6 +18,7 @@ public class EntityManager {
 		this.player = player;
 		entities = new ArrayList<Entity>();
 		addEntity(player);
+		addEntity(new Tree(handler, 100, 250));
 	}
 	
 	public void tick() {

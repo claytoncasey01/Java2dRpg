@@ -10,6 +10,10 @@ public class Tree extends StaticEntity {
 
 	public Tree(Handler handler, float x, float y) {
 		super(handler, x, y, Tile.TILE_WIDTH * 4, Tile.TILE_HEIGHT * 6);
+		bounds.x = 52;
+		bounds.y = 130;
+		bounds.width = 20;
+		bounds.height = 25;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,8 +26,7 @@ public class Tree extends StaticEntity {
 	@Override
 	public void render(Graphics g) {
 		// TODO: Add in tree sprites
-		g.drawImage(Assets.tree, (int) (x - handler.getCamera().getxOffset()), (int) (y - handler.getCamera().getyOffset()), width, height, null);
-		
+		g.drawImage(Assets.tree, (int) (x - handler.getCamera().getxOffset()), (int) (y - handler.getCamera().getyOffset()), width, height, null);	
 	}
 
 }
