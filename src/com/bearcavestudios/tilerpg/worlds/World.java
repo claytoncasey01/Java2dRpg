@@ -6,13 +6,11 @@ import java.util.Random;
 import com.bearcavestudios.tilerpg.Handler;
 import com.bearcavestudios.tilerpg.entities.EntityManager;
 import com.bearcavestudios.tilerpg.entities.creatures.Player;
-import com.bearcavestudios.tilerpg.entities.statics.Tree;
-import com.bearcavestudios.tilerpg.gfx.Assets;
 import com.bearcavestudios.tilerpg.tiles.Tile;
 import com.bearcavestudios.tilerpg.utils.Utils;
 
 public class World {
-	
+
 	private Handler handler;
 	private int width, height;
 	private int spawnX, spawnY;
@@ -115,6 +113,14 @@ public class World {
 	
 	public int getHeight() {
 		return height;
+	}
+	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 
 
