@@ -1,31 +1,40 @@
 package com.bearcavestudios.tilerpg.states;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import com.bearcavestudios.tilerpg.Handler;
+import com.bearcavestudios.tilerpg.gfx.Assets;
+import com.bearcavestudios.tilerpg.ui.ClickListener;
+import com.bearcavestudios.tilerpg.ui.UIImageButton;
+import com.bearcavestudios.tilerpg.ui.UIManager;
 
 public class MenuState extends State {
 	
+	private UIManager uiManager;
+	
 	public MenuState(Handler handler) {
 		super(handler);
+		uiManager = new UIManager(handler);
+		handler.getMouseManager().setUIManager(uiManager);
+		
+		uiManager.addObject(new UIImageButton(200, 200, 128, 64, Assets.btn_start, new ClickListener(){
+
+			@Override
+			public void onClick() {
+				handler.getMouseManager().setUIManager(null);
+				State.setState(handler.getGame().gameState);
+			}
+		}));
 	}
 
 	@Override
 	public void tick() {
-		if(handler.getMouseManager().isLeftPressed() && handler.getMouseManager().isRightPressed()) {
-			State.setState(handler.getGame().gameState);
-		}
-		System.out.println(
-				"Mouse X: " + handler.getMouseManager().getMouseX() + 
-				" Mouse Y: " + handler.getMouseManager().getMouseY()
-				);
+		uiManager.tick();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.GREEN);
-		g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 5, 5);
+		uiManager.render(g);
 	}
 
 }

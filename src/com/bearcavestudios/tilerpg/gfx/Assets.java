@@ -8,16 +8,23 @@ public class Assets {
 	private static final int PLAYER_WIDTH = 64, PLAYER_HEIGHT = 64;
 	public static BufferedImage grass, rock, dirt, grassPatch, tree;
 	public static BufferedImage[] player_idle, player_up, player_down, player_left, player_right;
+	public static BufferedImage[] btn_start;
 	
 
 	public static void init() {
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/forest.png"));
 		SpriteSheet playerSheet = new SpriteSheet(ImageLoader.loadImage("/textures/character.png"));
+		SpriteSheet uiSheet = new SpriteSheet(ImageLoader.loadImage("/textures/UI.png"));
 		grass = sheet.crop(0, 0, WIDTH, HEIGHT);
 		rock = sheet.crop(32 * 1, 0, WIDTH, HEIGHT);
 		dirt = sheet.crop(32 * 2, 0, WIDTH, HEIGHT);
 		grassPatch = sheet.crop(32 * 3, 0, WIDTH, HEIGHT);
 		tree = sheet.crop(WIDTH, HEIGHT, WIDTH * 2, HEIGHT * 3);
+		
+		// UI
+		btn_start = new BufferedImage[2];
+		btn_start[0] = uiSheet.crop(0, 0, WIDTH * 2, HEIGHT);
+		btn_start[1] = uiSheet.crop(WIDTH * 2, 0, WIDTH * 2, HEIGHT);
 		
 		// Player down animations
 		player_idle = new BufferedImage[1];
