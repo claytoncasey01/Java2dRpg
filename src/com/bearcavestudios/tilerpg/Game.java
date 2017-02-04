@@ -7,6 +7,7 @@ import com.bearcavestudios.tilerpg.display.Display;
 import com.bearcavestudios.tilerpg.gfx.Assets;
 import com.bearcavestudios.tilerpg.gfx.Camera;
 import com.bearcavestudios.tilerpg.input.KeyManager;
+import com.bearcavestudios.tilerpg.input.MouseManager;
 import com.bearcavestudios.tilerpg.states.GameState;
 import com.bearcavestudios.tilerpg.states.MenuState;
 import com.bearcavestudios.tilerpg.states.State;
@@ -24,11 +25,12 @@ public class Game implements Runnable {
 	private Graphics g;	
 	
 	// States
-	private State gameState;
-	private State menuState;
+	public State gameState;
+	public State menuState;
 	
 	// Input
 	private KeyManager keyManager;
+	private MouseManager mouseManager;
 	
 	// Camera
 	private Camera camera;
@@ -41,11 +43,19 @@ public class Game implements Runnable {
 		this.width = width;
 		this.height = height;
 		keyManager = new KeyManager();
+		mouseManager = new MouseManager();
 	}
 	
 	private void init() {
 		display = new Display(title, width, height);
+		
+		// Setup input
 		display.getFrame().addKeyListener(keyManager);
+		display.getFrame().addMouseListener(mouseManager);
+		display.getFrame().addMouseMotionListener(mouseManager);
+		display.getCanvas().addMouseListener(mouseManager);
+		display.getCanvas().addMouseMotionListener(mouseManager);
+		
 		Assets.init();
 		
 		handler = new Handler(this);
@@ -53,7 +63,8 @@ public class Game implements Runnable {
 		
 		gameState = new GameState(handler);
 		menuState = new MenuState(handler);
-		State.setState(gameState);
+		State.setState(menuState);
+		//State.setState(gameState);
 	}
 	
 	private void tick() {
@@ -153,6 +164,10 @@ public class Game implements Runnable {
 	
 	public KeyManager getKeyManager() {
 		return keyManager;
+	}
+	
+	public MouseManager getMouseManager() {
+		return mouseManager;
 	}
 	
 	public int getWidth() {

@@ -22,9 +22,12 @@ public class World {
 	public World(Handler handler, String path) {
 		this.handler = handler;
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
-		loadWorld(path);
-		//generateWorld();
-		
+		if(path != "") {
+			loadWorld(path);
+		} else {
+			generateWorld();
+		}
+	
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);
 	}
@@ -89,6 +92,8 @@ public class World {
 		Random rand = new Random();
 		width = 100;
 		height = 100;
+		spawnX = 100;
+		spawnY = 100;
 		tiles = new int[width][height];
 		
 		for(int y = 0; y < height; y++) {

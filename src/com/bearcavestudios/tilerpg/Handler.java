@@ -2,6 +2,7 @@ package com.bearcavestudios.tilerpg;
 
 import com.bearcavestudios.tilerpg.gfx.Camera;
 import com.bearcavestudios.tilerpg.input.KeyManager;
+import com.bearcavestudios.tilerpg.input.MouseManager;
 import com.bearcavestudios.tilerpg.worlds.World;
 
 public class Handler {
@@ -19,6 +20,10 @@ public class Handler {
 	
 	public KeyManager getKeyManager() {
 		return game.getKeyManager();
+	}
+	
+	public MouseManager getMouseManager() {
+		return game.getMouseManager();
 	}
 	
 	public int getWidth() {
