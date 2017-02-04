@@ -21,5 +21,11 @@ public class GrassPatch extends StaticEntity {
 	public void render(Graphics g) {
 		g.drawImage(Assets.grassPatch,(int) (x - handler.getCamera().getxOffset()), (int) (y - handler.getCamera().getyOffset()), null);
 	}
+	
+	@Override
+	public void die() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

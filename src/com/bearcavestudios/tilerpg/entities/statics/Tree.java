@@ -28,5 +28,11 @@ public class Tree extends StaticEntity {
 		// TODO: Add in tree sprites
 		g.drawImage(Assets.tree, (int) (x - handler.getCamera().getxOffset()), (int) (y - handler.getCamera().getyOffset()), width, height, null);	
 	}
+	
+	@Override
+	public void die() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
